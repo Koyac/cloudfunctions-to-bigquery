@@ -1,3 +1,4 @@
+import functions_framework
 from google.cloud import bigquery
 import logging
 
@@ -5,9 +6,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
-def gcs_to_bq(data, context):
-    client = bigquery.Client()
-
+@functions_framework.cloud_event
+def gcs_to_bq(cloud_event):
+    data = cloud_event.data
     bucket_name = data['bucket']
     file_name = data['name']
     file_end = file_name.split('.')[-1]
@@ -21,6 +22,7 @@ def gcs_to_bq(data, context):
     dataset_id = 'sales_calculation'
     partiton_date = file_name.rsplit("/")[1]
 
+    client = bigquery.Client()
     dataset_ref = client.dataset(dataset_id)
     job_config = bigquery.LoadJobConfig()
     job_config.skip_leading_rows = 1

@@ -40,4 +40,4 @@ def gcs_to_bq(data, context):
         logger.info(f"処理が完了しました:{load_job.output_rows} 行挿入しました。")
         
     except Exception as e:
-        logger.error(f"データを挿入するに際に、エラーが発生しました: {e}")
+        logger.error(f"データを挿入する際に、エラーが発生しました: {e}")

@@ -1,7 +1,9 @@
+# インポート
 import functions_framework
 from google.cloud import bigquery
 import logging
 
+# ロギングの設定(デバッグ情報やエラー、警告などの詳細な記録を管理するために使用します)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
@@ -18,8 +20,8 @@ def gcs_to_bq(cloud_event):
         return 
 
     uri = f'gs://{bucket_name}/{file_name}'
-    table_id = 'goods_sales'
     dataset_id = 'sales_calculation'
+    table_id = 'goods_sales'
     partiton_date = file_name.rsplit("/")[1]
 
     client = bigquery.Client()

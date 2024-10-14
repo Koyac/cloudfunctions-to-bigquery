@@ -1,9 +1,7 @@
-# インポート
 import functions_framework
 from google.cloud import bigquery
 import logging
 
-# ロギングの設定(デバッグ情報やエラー、警告などの詳細な記録を管理するために使用します)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
